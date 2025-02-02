@@ -6,23 +6,22 @@ body {
     font-size: 10px;
     font-family: Tahoma, Arial;
 }
-
-div.menu {
+nav {
     width: 100%;
     background-color: #4d5791;
     height: 44px;
     padding: 0 40px;
 }
 
-div.menu ul,
-div.menu ul li {
+nav ul,
+nav ul li {
     margin: 0;
     padding: 0 ;
     list-style: none;
     display: inline-block;
 }
 
-div.menu ul li a {
+nav ul li a {
     display: block;
     padding: 0 20px;
     line-height: 44px;
@@ -32,10 +31,11 @@ div.menu ul li a {
     margin: 0;
 }
 
-div.menu ul li a:hover  {
+nav ul li a:hover  {
     background-color: white;
     color: #4d5791;
 }
+
 
 div.hero {
     height: 350px;
@@ -95,4 +95,24 @@ div.hero h2 {
     .container .div.text-box {
         margin: 10px;
     }
+}
+.skip {
+    position: absolute;
+    top: -40px;
+    left: -1000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+    z-index: 1000;
 }
