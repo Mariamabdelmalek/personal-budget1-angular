@@ -58,9 +58,9 @@
             </article>
               <!-- This is a Semantic HTML Change-->
             <article>
-                <h1>Free</h1>
+                <h1>Chart</h1>
                 <p>
-                    This app is free!!! And you are the only one holding your data!
+                    <canvas id="myChart" width="400" height="400"></canvas>
                 </p>
             </article>
             
@@ -73,6 +73,55 @@
             All rights reserved &copy; Fabio Nolasco
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+
+        var datasource = {
+            datasets:[
+            {
+                data: [],
+                backgroundColor: [
+                'rgb(255, 99, 132)',  
+                'rgb(54, 162, 235)',  
+                'rgb(255, 205, 86)',  
+                'rgb(75, 192, 192)',  
+                'rgb(153, 102, 255)', 
+                'rgb(255, 159, 64)',  
+                'rgb(201, 203, 207)', 
+                'rgb(140, 220, 80)',  
+                'rgb(240, 128, 128)', 
+                'rgb(123, 104, 238)'
+               
+                ]
+            }
+            ],
+            labels: []
+
+       };
+
+       function createChart() {
+           var ctx = document.getElementById('myChart').getContext('2d');
+           var myPieChart = new Chart(ctx, {
+               type: 'pie',
+               data: datasource
+           });
+       }
+       function getBudget() {
+           axios.get('/budget')
+           .then(function (res) {
+               console.log(res.data);
+               for (var i = 0; i < res.data.mybudget.length; i++) {
+                   datasource.datasets[0].data[i] = res.data.mybudget[i].budget;
+                   datasource.labels[i] = res.data.mybudget[i].title;
+               }
+               createChart();
+           });
+           
+        }
+         getBudget();
+     
+    </script>
 
 </body>
 </html>
